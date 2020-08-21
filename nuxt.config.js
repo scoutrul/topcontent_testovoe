@@ -1,3 +1,5 @@
+import * as GmapVue from '~/node_modules/gmap-vue'
+
 export default {
   /*
    ** Nuxt rendering mode
@@ -34,7 +36,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ['@/plugins/google-maps'],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -51,12 +53,7 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    // Doc: https://buefy.github.io/#/documentation
-    'nuxt-buefy',
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-  ],
+  modules: ['nuxt-buefy'],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
@@ -66,5 +63,5 @@ export default {
    ** Build configuration
    ** See https://nuxtjs.org/api/configuration-build/
    */
-  build: {},
+  build: {}
 }

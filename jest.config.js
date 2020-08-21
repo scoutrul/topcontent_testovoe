@@ -1,4 +1,5 @@
 module.exports = {
+  globalSetup: '<rootDir>/jest.setup.js', // this line is the only change here
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
     '^~/(.*)$': '<rootDir>/$1',
@@ -15,4 +16,5 @@ module.exports = {
     '<rootDir>/components/**/*.vue',
     '<rootDir>/pages/**/*.vue',
   ],
+  forceExit: !!process.env.CI, // almost every CI platform sets this by default
 }

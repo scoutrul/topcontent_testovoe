@@ -1,46 +1,31 @@
-<template>
-  <section class="section">
-    <div class="columns is-mobile">
-      <card title="Free" icon="github">
-        Open source on
-        <a href="https://github.com/buefy/buefy">
-          GitHub
-        </a>
-      </card>
-
-      <card title="Responsive" icon="cellphone-link">
-        <b class="has-text-grey">
-          Every
-        </b>
-        component is responsive
-      </card>
-
-      <card title="Modern" icon="alert-decagram">
-        Built with
-        <a href="https://vuejs.org/">
-          Vue.js
-        </a>
-        and
-        <a href="http://bulma.io/">
-          Bulma
-        </a>
-      </card>
-
-      <card title="Lightweight" icon="arrange-bring-to-front">
-        No other internal dependency
-      </card>
-    </div>
-  </section>
+<template lang="pug">
+  section.section
+    gmap-map(:center="center" map-type-id="terrain" :zoom="5")
+      gmap-marker(
+        v-for="(item, index) in markers"
+        :key="index"
+        :position="item.position"
+        @click="center = item.position"
+      )
 </template>
 
 <script>
-import Card from '~/components/Card'
-
 export default {
   name: 'HomePage',
-
-  components: {
-    Card,
-  },
+  data: () => ({
+    center: { lat: -3.350235, lng: 111.995865 },
+    markers: [
+      { position: { lat: -0.48585, lng: 117.1466 } },
+      { position: { lat: -6.9127778, lng: 107.6205556 } },
+    ],
+  }),
 }
 </script>
+<style lang="scss" scoped>
+.vue-map-container {
+  height: 450px;
+  max-width: 992px;
+  width: 100%;
+  margin: auto;
+}
+</style>

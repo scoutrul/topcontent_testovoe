@@ -15,8 +15,13 @@
   "dependencies": {
     "@nuxt/typescript-runtime": "^1.0.0",
     "@nuxtjs/axios": "^5.12.0",
+    "node-sass": "^4.14.1",
     "nuxt": "^2.14.0",
-    "nuxt-buefy": "^0.3.31"
+    "nuxt-buefy": "^0.3.31",
+    "pug": "^3.0.0",
+    "pug-plain-loader": "^1.0.0",
+    "sass-loader": "^9.0.3",
+    "vue2-google-maps": "^0.10.7"
   },
   "devDependencies": {
     "@nuxt/types": "^2.14.0",
