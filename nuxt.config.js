@@ -43,5 +43,7 @@ export default {
       Authorization: `Bearer TMprlXmuupP1pSFpfS49nWyrniQiLEQ6wJVhR1avsLGfjRPDS4We0WHlVB3kkxje16tx4PMQ4GPfX5fb`,
     },
   },
-  build: {},
+  build: {
+    transpile: [/^vue2-google-maps($|\/)/],
+  },
 }

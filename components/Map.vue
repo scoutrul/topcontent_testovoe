@@ -1,5 +1,4 @@
 <template lang="pug">
-  section.section
     gmap-map(
       ref="gmap"
       :center="getCenter"
@@ -22,17 +21,23 @@
         :opened="infoWinOpen"
         @closeclick="infoWinOpen = false")
         div(v-html="infoContent")
-      div(slot="visible")
-        div(style="bottom: 50; left: 50; background-color: #0000FF; color: white; position: absolute; z-index: 100") {{statusText}}
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'Events',
+  name: 'Map',
+  props: {
+    facility: {
+      type: String,
+      default: 'events',
+    },
+    apiPath: {
+      type: String,
+      default: 'events',
+    },
+  },
   data: () => ({
-    facility: 'events',
-    apiPath: 'events',
     statusText: '',
     center: { lat: -3.350235, lng: 111.995865 },
     markers: [
