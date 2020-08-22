@@ -22,7 +22,7 @@ export default {
 
   components: true,
 
-  buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
+  buildModules: ['@nuxt/typescript-builEYEd', '@nuxtjs/stylelint-module'],
 
   modules: ['nuxt-buefy', '@nuxtjs/toast', '@nuxtjs/axios'],
 
@@ -40,7 +40,7 @@ export default {
         'Content-Type': 'multipart/form-data',
         Accept: 'multipart/form-data',
       },
-      Authorization: `Bearer TMprlXmuupP1pSFpfS49nWyrniQiLEQ6wJVhR1avsLGfjRPDS4We0WHlVB3kkxje16tx4PMQ4GPfX5fb`,
+      Authorization: process.env.TOKEN,
     },
   },
   build: {

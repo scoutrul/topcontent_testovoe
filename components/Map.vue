@@ -39,11 +39,6 @@ export default {
   },
   data: () => ({
     statusText: '',
-    center: { lat: -3.350235, lng: 111.995865 },
-    markers: [
-      { position: { lat: -0.48585, lng: 117.1466 } },
-      { position: { lat: -6.9127778, lng: 107.6205556 } },
-    ],
     infoWindowPos: {
       lat: 0,
       lng: 0,
@@ -61,15 +56,12 @@ export default {
   }),
   computed: {
     ...mapState({
-      data: (state) => state.events,
+      data: (state) => state[this.facility],
       isLoading: (state) => state.isLoading,
     }),
     getCenter() {
-      return this.formatLocation(this.$store.state.events[0]?.location)
+      return this.formatLocation(this.data[0]?.location)
     },
-  },
-  beforeMount() {
-    this.getData({ facility: this.facility, path: this.apiPath })
   },
   mounted() {
     this.$refs.gmap.$mapPromise.then((map) => {
