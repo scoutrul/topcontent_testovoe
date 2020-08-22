@@ -10,15 +10,32 @@
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 export default {
-  name: 'HomePage',
+  name: 'Events',
   data: () => ({
+    facility: 'events',
+    apiPath: 'events',
     center: { lat: -3.350235, lng: 111.995865 },
     markers: [
       { position: { lat: -0.48585, lng: 117.1466 } },
       { position: { lat: -6.9127778, lng: 107.6205556 } },
     ],
   }),
+  computed: {
+    ...mapState({
+      data: (state) => state.events,
+      isLoading: (state) => state.isLoading,
+    }),
+  },
+  mounted() {
+    this.getData({ facility: this.facility, path: this.apiPath })
+  },
+  methods: {
+    ...mapActions({
+      getData: 'getData',
+    }),
+  },
 }
 </script>
 <style lang="scss" scoped>

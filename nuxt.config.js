@@ -1,20 +1,7 @@
-import * as GmapVue from '~/node_modules/gmap-vue'
-
 export default {
-  /*
-   ** Nuxt rendering mode
-   ** See https://nuxtjs.org/api/configuration-mode
-   */
   mode: 'spa',
-  /*
-   ** Nuxt target
-   ** See https://nuxtjs.org/api/configuration-target
-   */
   target: 'static',
-  /*
-   ** Headers of the page
-   ** See https://nuxtjs.org/api/configuration-head
-   */
+
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -28,40 +15,33 @@ export default {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  /*
-   ** Global CSS
-   */
+
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   ** https://nuxtjs.org/guide/plugins
-   */
-  plugins: ['@/plugins/google-maps'],
-  /*
-   ** Auto import components
-   ** See https://nuxtjs.org/api/configuration-components
-   */
+
+  plugins: ['@/plugins/google-maps', '~/plugins/notify.js'],
+
   components: true,
-  /*
-   ** Nuxt.js dev-modules
-   */
-  buildModules: [
-    '@nuxt/typescript-build',
-    // Doc: https://github.com/nuxt-community/stylelint-module
-    '@nuxtjs/stylelint-module',
-  ],
-  /*
-   ** Nuxt.js modules
-   */
-  modules: ['nuxt-buefy'],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
-  /*
-   ** Build configuration
-   ** See https://nuxtjs.org/api/configuration-build/
-   */
-  build: {}
+
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
+
+  modules: ['nuxt-buefy', '@nuxtjs/toast', '@nuxtjs/axios'],
+
+  toast: {
+    position: 'top-center',
+    duration: 5000,
+  },
+  axios: {
+    headers: {
+      common: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json, text/plain, */*',
+      },
+      post: {
+        'Content-Type': 'multipart/form-data',
+        Accept: 'multipart/form-data',
+      },
+      Authorization: `Bearer TMprlXmuupP1pSFpfS49nWyrniQiLEQ6wJVhR1avsLGfjRPDS4We0WHlVB3kkxje16tx4PMQ4GPfX5fb`,
+    },
+  },
+  build: {},
 }
