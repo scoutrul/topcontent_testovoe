@@ -1,7 +1,11 @@
 export default {
   mode: 'spa',
   target: 'static',
-
+  env: {
+    BASE_URL: process.env.BASE_URL || 'http://localhost:3000',
+    GMAP_KEY: process.env.GMAP_KEY,
+    TOKEN: process.env.TOKEN,
+  },
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -22,7 +26,7 @@ export default {
 
   components: true,
 
-  buildModules: ['@nuxt/typescript-builEYEd', '@nuxtjs/stylelint-module'],
+  buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
 
   modules: ['nuxt-buefy', '@nuxtjs/toast', '@nuxtjs/axios'],
 

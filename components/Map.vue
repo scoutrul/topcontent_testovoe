@@ -7,7 +7,7 @@
       :zoom="2"
       style="width: 100%; height: 600px")
       gmap-marker(
-        v-for="(item, index) in $store.state.events"
+        v-for="(item, index) in $store.state[facility]"
         :key="index"
         :position="formatLocation(item.location)"
         :clickable="true"
@@ -24,17 +24,17 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 export default {
   name: 'Map',
   props: {
     facility: {
       type: String,
-      default: 'events',
+      default: '',
     },
     apiPath: {
       type: String,
-      default: 'events',
+      default: '',
     },
   },
   data: () => ({
@@ -56,7 +56,9 @@ export default {
   }),
   computed: {
     ...mapState({
-      data: (state) => state[this.facility],
+      data(state) {
+        return state[this.facility]
+      },
       isLoading: (state) => state.isLoading,
     }),
     getCenter() {
@@ -64,18 +66,21 @@ export default {
     },
   },
   mounted() {
-    this.$refs.gmap.$mapPromise.then((map) => {
-      const bounds = new google.maps.LatLngBounds()
-      for (const m of this.$store.state.events) {
-        bounds.extend(this.formatLocation(m.location))
-      }
-      map.fitBounds(bounds)
-    })
+    try {
+      this.$refs.gmap &&
+        this.$refs.gmap.$mapPromise.then((map) => {
+          const bounds = new google.maps.LatLngBounds()
+          for (const m of this.$store.state[this.facility]) {
+            bounds.extend(this.formatLocation(m.location))
+          }
+          map.fitBounds(bounds)
+        })
+    } catch (e) {
+      debugger
+      console.log(e)
+    }
   },
   methods: {
-    ...mapActions({
-      getData: 'getData',
-    }),
     formatLocation(location) {
       if (!location) return {}
       const split = location.split(',')

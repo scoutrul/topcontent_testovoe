@@ -1,3 +1,5 @@
+const BASE_URL = process.env.BASE_URL
+
 const toFormData = function (obj) {
   const formData = new FormData()
   for (const key in obj) {
@@ -15,9 +17,7 @@ export const actions = {
   async getData({ commit }, { path, facility }) {
     commit('updLoading', true)
     try {
-      const res = await this.$axios.$get(
-        `https://test-task-1.env.topcontent.com/api/${path}`
-      )
+      const res = await this.$axios.$get(`${BASE_URL}/${path}`)
       commit('setData', {
         facility,
         data: res,
@@ -33,7 +33,7 @@ export const actions = {
     commit('updLoading', true)
     try {
       const res = await this.$axios.$post(
-        `https://test-task-1.env.topcontent.com/api/${path}`,
+        `${BASE_URL}/${path}`,
         toFormData(data)
       )
       commit('pushOne', { facility, data: { ...data, id: res.id } })

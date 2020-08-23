@@ -4,14 +4,23 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import Map from '@/components/Map'
-import { mapState, mapActions } from 'vuex'
 export default {
+  name: 'Index',
   components: { Map },
-  name: 'Events',
   data: () => ({
     facility: 'events',
     apiPath: 'events',
   }),
+
+  mounted() {
+    this.getData({ facility: this.facility, path: this.apiPath })
+  },
+  methods: {
+    ...mapActions({
+      getData: 'getData',
+    }),
+  },
 }
 </script>
