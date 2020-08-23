@@ -20,7 +20,17 @@
         :position="infoWindowPos"
         :opened="infoWinOpen"
         @closeclick="infoWinOpen = false")
-        div(v-html="infoContent")
+        .card
+          .card-content
+            .media
+              .media-content
+                p.title.is-4 {{activeItem.title}}
+            .content
+              div {{activeItem.description}}
+              div Start: {{activeItem.start_date}}
+              div End: {{activeItem.end_date}}
+            .action
+              <button @click="goToEvent(activeItem.id)">Order now!</button>
 </template>
 
 <script>
@@ -52,7 +62,7 @@ export default {
       },
     },
     map: null,
-    infoContent: '',
+    activeItem: {},
   }),
   computed: {
     ...mapState({
@@ -81,6 +91,9 @@ export default {
     }
   },
   methods: {
+    goToEvent(id) {
+      this.$router.push(`/event/${id}`)
+    },
     formatLocation(location) {
       if (!location) return {}
       const split = location.split(',')
@@ -88,34 +101,13 @@ export default {
     },
     toggleInfoWindow(marker, idx) {
       this.infoWindowPos = this.formatLocation(marker.location)
-      this.infoContent = this.getInfoWindowContent(marker)
+      this.activeItem = marker
       if (this.currentMidx === idx) {
         this.infoWinOpen = !this.infoWinOpen
       } else {
         this.infoWinOpen = true
         this.currentMidx = idx
       }
-    },
-
-    getInfoWindowContent(marker) {
-      return `<div class="card">
-        <div class="card-content">
-          <div class="media">
-            <div class="media-content">
-              <p class="title is-4">${marker.title}</p>
-            </div>
-          </div>
-          <div class="content">
-            ${marker.description}
-            <br>
-            Start: <time datetime="2016-1-1">${marker.start_date}</time></br>
-            End: <time datetime="2016-1-1">${marker.end_date}</time>
-          </div>
-          <div class="action">
-            <button>Order now!</button>
-          </div>
-        </div>
-      </div>`
     },
   },
 }
