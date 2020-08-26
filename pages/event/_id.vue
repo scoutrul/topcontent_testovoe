@@ -10,7 +10,7 @@
             b-button(
               v-for="item in event.stands" :key="item.id"
               @click="openForm(item)"
-              :type="'is-success is-light'"
+              :type="order.stand.id === item.id ? 'is-success is-light' : ''"
               size="is-large"
               :inverted="order.stand.id !== item.id"
               :disabled="order.stand.id === item.id"
