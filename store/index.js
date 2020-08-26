@@ -22,9 +22,9 @@ export const actions = {
         facility,
         data: res,
       })
-      this.$notify.success('Данные загружены')
+      this.$toast.success('Данные загружены')
     } catch (err) {
-      this.$notify.error(err)
+      this.$toast.error(err)
     } finally {
       commit('updLoading', false)
     }
@@ -37,9 +37,9 @@ export const actions = {
         toFormData(data)
       )
       commit('pushOne', { facility, data: { ...data, id: res.id } })
-      this.$notify.success('Успешно добавлено')
+      this.$toast.success('Успешно добавлено')
     } catch (err) {
-      this.$notify.error(err)
+      this.$toast.error(err)
     } finally {
       commit('updLoading', false)
     }

@@ -22,7 +22,7 @@ export default {
 
   css: [],
 
-  plugins: ['@/plugins/google-maps', '~/plugins/notify'],
+  plugins: ['@/plugins/google-maps', '~/plugins/toast'],
 
   components: true,
 

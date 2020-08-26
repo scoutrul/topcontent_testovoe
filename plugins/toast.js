@@ -1,7 +1,7 @@
 import { ToastProgrammatic as Toast } from 'buefy'
 
 export default (ctx, inject) => {
-  const notify = {
+  const toast = {
     error: (response) => {
       const message = response?.message || 'Error'
       Toast.open({ message, type: 'is-danger' })
@@ -12,5 +12,5 @@ export default (ctx, inject) => {
     },
   }
 
-  inject('notify', notify)
+  inject('toast', toast)
 }

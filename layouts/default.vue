@@ -1,15 +1,19 @@
-<template>
-  <section class="main-content columns">
-    <div class="container column is-10">
-      <nuxt />
-    </div>
-  </section>
+<template lang="pug">
+  section.container
+    .content
+      b-navbar
+        template(slot="brand")
+          b-button(type="is-warning" outlined @click="$router.push('/')" v-if="$route.path !== '/'") MAP
+      nuxt
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-  data() {
-    return {}
+  computed: {
+    ...mapState({
+      isLoading: (state) => state.isLoading,
+    }),
   },
 }
 </script>

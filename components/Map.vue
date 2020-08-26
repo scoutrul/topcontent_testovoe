@@ -5,7 +5,9 @@
       :averageCenter="true"
       map-type-id="terrain"
       :zoom="2"
-      style="width: 100%; height: 600px")
+      style="width: 100%; height: 600px"
+
+      )
       gmap-marker(
         v-for="(item, index) in $store.state[facility]"
         :key="index"
@@ -30,7 +32,7 @@
               div Start: {{activeItem.start_date}}
               div End: {{activeItem.end_date}}
             .action
-              <button @click="goToEvent(activeItem.id)">Order now!</button>
+              b-button(@click="goToEvent(activeItem.id)") Order here!
 </template>
 
 <script>
@@ -76,18 +78,14 @@ export default {
     },
   },
   mounted() {
-    try {
-      this.$refs.gmap &&
-        this.$refs.gmap.$mapPromise.then((map) => {
-          const bounds = new google.maps.LatLngBounds()
-          for (const m of this.$store.state[this.facility]) {
-            bounds.extend(this.formatLocation(m.location))
-          }
-          map.fitBounds(bounds)
-        })
-    } catch (e) {
-      debugger
-      console.log(e)
+    if (!this.isLoading) {
+      this.$refs.gmap.$mapPromise.then((map) => {
+        const bounds = new google.maps.LatLngBounds()
+        for (const m of this.$store.state[this.facility]) {
+          bounds.extend(this.formatLocation(m.location))
+        }
+        map.fitBounds(bounds)
+      })
     }
   },
   methods: {

@@ -1,13 +1,18 @@
 <template lang="pug">
   section(v-if="!isLoading")
       .container.hero.is-medium.is-primary.is-bold
-        h1.title {{event.title}}
+        .is-medium  {{event.title}}
         h1.subtitle {{event.description}}
-      button(@click="$router.push('/')") back to map
-      div(v-for="item in event.stands" :key="item.id").card
-        div row_number: {{ item.row_number }}
-        div seat_number: {{ item.seat_number }}
-        button(:disabled="order.stand.id === item.id" @click="openForm(item)") Stand
+      div().box
+        .buttons
+          b-button(
+            v-for="item in event.stands" :key="item.id"
+            @click="openForm(item)"
+            :type="'is-success is-light'"
+            size="is-large"
+            :inverted="order.stand.id !== item.id"
+            :outlined="order.stand.id === item.id"
+          ) row: {{ item.row_number }}, seat: {{ item.seat_number }}
 
 </template>
 
@@ -51,6 +56,7 @@ export default {
       getData: 'getData',
     }),
     openForm(item) {
+      console.log('sdf')
       this.order.stand = item
     },
   },
