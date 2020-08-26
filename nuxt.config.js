@@ -31,7 +31,7 @@ export default {
   modules: ['nuxt-buefy', '@nuxtjs/toast', '@nuxtjs/axios'],
 
   toast: {
-    position: 'top-center',
+    position: 'bottom-center',
     duration: 5000,
   },
   axios: {

@@ -9,8 +9,8 @@ const toFormData = function (obj) {
 }
 
 export const state = () => ({
+  isLoading: false,
   events: [],
-  stands: [],
 })
 
 export const actions = {
