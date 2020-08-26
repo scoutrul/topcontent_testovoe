@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.content
+  section.content(style="padding: 10px 0;")
     .container.mt-10
       b-navbar
         template(slot="brand")

@@ -2,9 +2,15 @@ const BASE_URL = process.env.BASE_URL
 
 const toFormData = function (obj) {
   const formData = new FormData()
+
   for (const key in obj) {
-    formData.set(key, obj[key])
+    if (key === 'file') {
+      formData.append(key, obj[key])
+    } else {
+      formData.set(key, obj[key])
+    }
   }
+
   return formData
 }
 
@@ -29,15 +35,14 @@ export const actions = {
       commit('updLoading', false)
     }
   },
-  async postData({ commit }, { facility, path, data = {} }) {
+  async postData({ commit }, { path, data = {} }) {
     commit('updLoading', true)
     try {
       const res = await this.$axios.$post(
         `${BASE_URL}/${path}`,
         toFormData(data)
       )
-      commit('pushOne', { facility, data: { ...data, id: res.id } })
-      this.$toast.success('Successfully added')
+      this.$toast.success('Success')
     } catch (err) {
       this.$toast.error(err)
     } finally {
@@ -49,9 +54,6 @@ export const actions = {
 export const mutations = {
   setData(state, { facility, data }) {
     state[facility] = data
-  },
-  pushOne(state, { facility, data }) {
-    state[facility].push(data)
   },
   updLoading(state, status) {
     state.isLoading = status

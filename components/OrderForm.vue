@@ -1,38 +1,69 @@
-<template>
+<template lang="pug">
   <section>
     <b-field label="Name">
-      <b-input value="Kevin Garvey"></b-input>
+      <b-input v-model="name" placeholder="Company name"></b-input>
+    </b-field>
+    <b-field label="Admin">
+      <b-input placeholder="Kevin Garvey" v-model="admin"></b-input>
     </b-field>
 
-    <b-field label="Email" type="is-danger" message="This email is invalid">
-      <b-input type="email" value="john@" maxlength="30"> </b-input>
+    <b-field placeholder="Email" type="is-danger" message="This email is invalid">
+      <b-input type="email" value="john@" maxlength="30" v-model="email">
+      </b-input>
     </b-field>
 
-    <b-field
-      label="Username"
-      type="is-success"
-      message="This username is available"
-    >
-      <b-input value="johnsilver" maxlength="30"></b-input>
+    <b-field placeholder="Details">
+      <b-input maxlength="200" type="textarea" v-model="details"></b-input>
     </b-field>
 
-    <b-field
-      label="Password"
-      type="is-warning"
-      :message="[
-        'Password is too short',
-        'Password must have at least 8 characters',
-      ]"
-    >
-      <b-input value="123" type="password" maxlength="30"></b-input>
+    <b-field class="file is-primary" :class="{ 'has-name': !!file }">
+      <b-upload v-model="file" class="file-label">
+        <span class="file-cta">
+          <b-icon class="file-icon" icon="upload"></b-icon>
+          <span class="file-label">Click to upload logotype</span>
+        </span>
+        <span class="file-name" v-if="file"> {{ file.name }}
+        </span>
+      </b-upload>
     </b-field>
 
-    <b-field label="Subject">
-      <b-select placeholder="Select a subject">
-        <option value="1">Option 1</option>
-        <option value="2">Option 2</option>
-      </b-select>
+    <b-field class="file is-primary" :class="{ 'has-name': !!file }">
+      b-button(
+        @click="sendForm"
+        type="is-success"
+        size="is-large"
+        :disabled="$store.state.isLoading"
+        ) Send request
     </b-field>
   </section>
 </template>
-export default {}
+
+<script>
+export default {
+  props: ['apiPath'],
+  data() {
+    return {
+      name: '',
+      admin: '',
+      email: '',
+      details: '',
+      file: null,
+    }
+  },
+  methods: {
+    sendForm() {
+      const { name, admin, email, details, file } = this
+      this.$store.dispatch('postData', {
+        path: this.apiPath,
+        data: {
+          name,
+          admin,
+          email,
+          details,
+          file,
+        },
+      })
+    },
+  },
+}
+</script>

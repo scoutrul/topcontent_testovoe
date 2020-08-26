@@ -6,18 +6,24 @@
             .title  {{event.title}}
             .subtitle {{event.description}}
       .container
+          .content Please choose the seat:
           .buttons.content
-            b-button(
-              v-for="item in event.stands" :key="item.id"
-              @click="openForm(item)"
-              :type="order.stand.id === item.id ? 'is-success is-light' : ''"
-              size="is-large"
-              :inverted="order.stand.id !== item.id"
-              :disabled="order.stand.id === item.id"
-            ) row: {{ item.row_number }}, seat: {{ item.seat_number }}
-          .content
-            OrderForm
-
+            div(v-for="item in event.stands" :key="item.id")
+              div(v-if="item.company")
+                .field Standed by {{ item.company.name }}
+                img(
+                  :src="item.company.logo"
+                  alt="A random image"
+                  width="64")
+              b-button(
+                @click="openForm(item)"
+                :type="order.stand.id === item.id ? 'is-success is-light' : ''"
+                size="is-large"
+                :inverted="order.stand.id !== item.id"
+                :disabled="item.company"
+              ) row: {{ item.row_number }}, seat: {{ item.seat_number }}, price: {{ item.price }}
+          .content(v-if="order.stand.id")
+            OrderForm(:apiPath="`${apiPath}/${this.$route.params.id}`")
 </template>
 
 <script>
@@ -62,8 +68,11 @@ export default {
       getData: 'getData',
     }),
     openForm(item) {
-      console.log('sdf')
-      this.order.stand = item
+      if (item.id === this.order.stand.id) {
+        this.order.stand = {}
+      } else {
+        this.order.stand = item
+      }
     },
   },
 }
