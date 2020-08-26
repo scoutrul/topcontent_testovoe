@@ -22,18 +22,14 @@ export default {
 
   css: [],
 
-  plugins: ['@/plugins/google-maps', '~/plugins/notify.js'],
+  plugins: ['@/plugins/google-maps', '~/plugins/notify'],
 
   components: true,
 
   buildModules: ['@nuxt/typescript-build', '@nuxtjs/stylelint-module'],
 
-  modules: ['nuxt-buefy', '@nuxtjs/toast', '@nuxtjs/axios'],
+  modules: ['nuxt-buefy', '@nuxtjs/axios'],
 
-  toast: {
-    position: 'bottom-center',
-    duration: 5000,
-  },
   axios: {
     headers: {
       common: {

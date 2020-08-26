@@ -40,7 +40,7 @@ export default {
   computed: {
     ...mapState({
       event(state) {
-        return state[`${this.facility}/${this.$route.params.id}`] || {}
+        return state[`${this.facility}/${this.$route.params.id}`]
       },
       isLoading: (state) => state.isLoading,
     }),
