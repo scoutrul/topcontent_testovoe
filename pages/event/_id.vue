@@ -1,25 +1,31 @@
 <template lang="pug">
   section(v-if="!isLoading")
-      .container.hero.is-medium.is-primary.is-bold
-        .is-medium  {{event.title}}
-        h1.subtitle {{event.description}}
-      div().box
-        .buttons
-          b-button(
-            v-for="item in event.stands" :key="item.id"
-            @click="openForm(item)"
-            :type="'is-success is-light'"
-            size="is-large"
-            :inverted="order.stand.id !== item.id"
-            :outlined="order.stand.id === item.id"
-          ) row: {{ item.row_number }}, seat: {{ item.seat_number }}
+      .hero.is-medium.is-primary.is-bold.content
+        .hero-body
+          .container
+            .title  {{event.title}}
+            .subtitle {{event.description}}
+      .container
+          .buttons.content
+            b-button(
+              v-for="item in event.stands" :key="item.id"
+              @click="openForm(item)"
+              :type="'is-success is-light'"
+              size="is-large"
+              :inverted="order.stand.id !== item.id"
+              :disabled="order.stand.id === item.id"
+            ) row: {{ item.row_number }}, seat: {{ item.seat_number }}
+          .content
+            OrderForm
 
 </template>
 
 <script>
+import OrderForm from '~/components/OrderForm'
 import { mapState } from 'vuex'
 import { mapActions } from 'vuex'
 export default {
+  components: { OrderForm },
   name: 'Event',
   async fetch() {
     await this.getData({
