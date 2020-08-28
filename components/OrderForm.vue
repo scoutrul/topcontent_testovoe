@@ -7,8 +7,8 @@
       <b-input placeholder="Kevin Garvey" v-model="admin"></b-input>
     </b-field>
 
-    <b-field placeholder="Email" type="is-danger" message="This email is invalid">
-      <b-input type="email" value="john@" maxlength="30" v-model="email">
+    <b-field label="Email">
+      <b-input type="email" placeholder="email@mail" maxlength="30" v-model="email">
       </b-input>
     </b-field>
 
@@ -51,10 +51,10 @@ export default {
     }
   },
   methods: {
-    sendForm() {
+    async sendForm() {
       const { name, admin, email, details, file } = this
-      this.$store.dispatch('postData', {
-        path: this.apiPath,
+      await this.$store.dispatch('postData', {
+        path: `stands/${this.$route.params.id}`,
         data: {
           name,
           admin,

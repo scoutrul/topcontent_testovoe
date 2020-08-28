@@ -38,11 +38,11 @@ export const actions = {
   async postData({ commit }, { path, data = {} }) {
     commit('updLoading', true)
     try {
-      const res = await this.$axios.$post(
-        `${BASE_URL}/${path}`,
-        toFormData(data)
-      )
-      this.$toast.success('Success')
+      await this.$axios
+        .$post(`${BASE_URL}/${path}`, toFormData(data))
+        .then(() => {
+          this.$toast.success('Success')
+        })
     } catch (err) {
       this.$toast.error(err)
     } finally {

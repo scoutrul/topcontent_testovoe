@@ -17,13 +17,13 @@
                   width="64")
               b-button(
                 @click="openForm(item)"
-                :type="order.stand.id === item.id ? 'is-success is-light' : ''"
+                :type="stand.id === item.id ? 'is-success is-light' : ''"
                 size="is-large"
-                :inverted="order.stand.id !== item.id"
+                :inverted="stand.id !== item.id"
                 :disabled="item.company"
               ) row: {{ item.row_number }}, seat: {{ item.seat_number }}, price: {{ item.price }}
-          .content(v-if="order.stand.id")
-            OrderForm(:apiPath="`${apiPath}/${this.$route.params.id}`")
+          .content(v-if="stand.id")
+            OrderForm
 </template>
 
 <script>
@@ -42,17 +42,8 @@ export default {
   data: () => ({
     facility: 'event',
     apiPath: 'events',
-    order: {
-      stand: {},
-      form: {
-        name: '',
-        admin: '',
-        email: '',
-        phone: '',
-        details: '',
-        logo: '',
-      },
-    },
+
+    stand: {},
   }),
   computed: {
     ...mapState({
@@ -68,10 +59,10 @@ export default {
       getData: 'getData',
     }),
     openForm(item) {
-      if (item.id === this.order.stand.id) {
-        this.order.stand = {}
+      if (item.id === this.stand.id) {
+        this.stand = {}
       } else {
-        this.order.stand = item
+        this.stand = item
       }
     },
   },
