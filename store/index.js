@@ -16,7 +16,7 @@ const toFormData = function (obj) {
 
 export const state = () => ({
   isLoading: false,
-  events: [],
+  events: [{ location: '0, 0' }],
 })
 
 export const actions = {

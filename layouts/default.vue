@@ -1,9 +1,9 @@
 <template lang="pug">
   section.content(style="padding: 10px 0;")
     .container.mt-10
-      b-navbar
+      b-navbar(:mobile-burger="false")
         template(slot="brand")
-          b-button(type="is-warning" outlined @click="$router.push('/')" v-if="$route.path !== '/'") MAP
+          b-button(type="is-warning" size="is-large" @click="$router.push('/')" v-if="$route.path !== '/'").button MAP
     nuxt
 </template>
 
@@ -17,3 +17,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.button {
+  margin: 10px auto 20px auto;
+}
+</style>

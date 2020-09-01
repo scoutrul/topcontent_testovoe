@@ -7,14 +7,8 @@
             .subtitle {{event.description}}
       .container
           .content Please choose the seat:
-          .buttons.content
-            div(v-for="item in event.stands" :key="item.id")
-              div(v-if="item.company")
-                .field Standed by {{ item.company.name }}
-                img(
-                  :src="item.company.logo"
-                  alt="A random image"
-                  width="64")
+          .content.buttons
+            div(v-for="item in event.stands" :key="item.id").company
               b-button(
                 @click="openForm(item)"
                 :type="stand.id === item.id ? 'is-success is-light' : ''"
@@ -22,6 +16,13 @@
                 :inverted="stand.id !== item.id"
                 :disabled="item.company"
               ) row: {{ item.row_number }}, seat: {{ item.seat_number }}, price: {{ item.price }}
+              div(v-if="item.company")
+                .field(v-if="item.company.name") {{ item.company.name }}
+                b-image(
+                  v-if="item.company.logo"
+                  :src="item.company.logo"
+                  alt="A random image"
+                  width="64")
           .content(v-if="stand.id")
             OrderForm
 </template>
@@ -68,3 +69,15 @@ export default {
   },
 }
 </script>
+<style scoped>
+.company {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.buttons {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+</style>

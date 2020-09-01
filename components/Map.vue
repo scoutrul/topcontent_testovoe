@@ -61,7 +61,6 @@ export default {
         height: -35,
       },
     },
-    map: null,
     activeItem: {},
   }),
   computed: {
@@ -112,5 +111,11 @@ export default {
   max-width: 992px;
   width: 100%;
   margin: auto;
+}
+</style>
+<style lang="scss">
+.gm-ui-hover-effect {
+  top: 8px !important;
+  right: 8px !important;
 }
 </style>

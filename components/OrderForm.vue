@@ -12,7 +12,7 @@
       </b-input>
     </b-field>
 
-    <b-field placeholder="Details">
+    <b-field label="Details">
       <b-input maxlength="200" type="textarea" v-model="details"></b-input>
     </b-field>
 
