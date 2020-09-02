@@ -5,11 +5,14 @@
           .container
             .title  {{event.title}}
             .subtitle {{event.description}}
-      .container
-          .content Please choose the seat:
+      .container.px-2.pb-6
+          .content(v-if="stand.id")
+            OrderForm
+          .is-size-3.has-text-centered.my-4 Please choose the seat:
           .content.buttons
             div(v-for="item in event.stands" :key="item.id").company
               b-button(
+                expanded
                 @click="openForm(item)"
                 :type="stand.id === item.id ? 'is-success is-light' : ''"
                 size="is-large"
@@ -23,8 +26,6 @@
                   :src="item.company.logo"
                   alt="A random image"
                   width="64")
-          .content(v-if="stand.id")
-            OrderForm
 </template>
 
 <script>
@@ -74,6 +75,9 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
+  padding: 4px;
+  width: 100%;
+  max-width: 320px;
 }
 .buttons {
   display: flex;

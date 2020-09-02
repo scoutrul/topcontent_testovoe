@@ -3,8 +3,7 @@
       ref="gmap"
       :center="this.data[0] ? formatLocation(this.data[0].location) : {}"
       map-type-id="terrain"
-      :zoom="2"
-      style="width: 100%; height: 600px"
+      :zoom="3.2"
       )
       gmap-marker(
         v-for="(item, index) in $store.state[facility]"
@@ -20,17 +19,13 @@
         :position="infoWindowPos"
         :opened="infoWinOpen"
         @closeclick="infoWinOpen = false")
-        .card
-          .card-content
-            .media
-              .media-content
-                p.title.is-4 {{activeItem.title}}
-            .content
-              div {{activeItem.description}}
-              div Start: {{activeItem.start_date}}
-              div End: {{activeItem.end_date}}
-            .action
-              b-button(@click="goToEvent(activeItem.id)") Order here!
+        p.title.is-4 {{activeItem.title}}
+        .content
+          div {{activeItem.description}}
+          div Start: {{activeItem.start_date}}
+          div End: {{activeItem.end_date}}
+        .action
+          b-button(@click="goToEvent(activeItem.id)") Go!
 </template>
 
 <script>
@@ -107,8 +102,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .vue-map-container {
-  height: 450px;
-  max-width: 992px;
+  height: 100%;
+  min-height: 100vh;
   width: 100%;
   margin: auto;
 }

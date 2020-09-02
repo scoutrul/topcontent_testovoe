@@ -1,9 +1,9 @@
 <template lang="pug">
-  section.content(style="padding: 10px 0;")
-    .container.mt-10
+  section.content
+    .container.mt-10( v-if="$route.path !== '/'")
       b-navbar(:mobile-burger="false")
         template(slot="brand")
-          b-button(type="is-warning" size="is-large" @click="$router.push('/')" v-if="$route.path !== '/'").button MAP
+          b-button(type="is-warning" size="is-large" @click="$router.push('/')" expanded).button MAP
     nuxt
 </template>
 

@@ -1,5 +1,5 @@
 <template lang="pug">
-  <section>
+  section(style="max-width: 540px; margin: auto")
     <b-field label="Name">
       <b-input v-model="name" placeholder="Company name"></b-input>
     </b-field>
@@ -8,7 +8,7 @@
     </b-field>
 
     <b-field label="Email">
-      <b-input type="email" placeholder="email@mail" maxlength="30" v-model="email">
+      <b-input type="email" placeholder="email@mail.com" maxlength="30" v-model="email">
       </b-input>
     </b-field>
 
@@ -29,11 +29,12 @@
 
     <b-field class="file is-primary" :class="{ 'has-name': !!file }">
       b-button(
+        expanded
         @click="sendForm"
         type="is-success"
         size="is-large"
         :disabled="$store.state.isLoading"
-        ) Send request
+        ).my-4 Send request
     </b-field>
   </section>
 </template>
