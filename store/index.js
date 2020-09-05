@@ -1,4 +1,4 @@
-const BASE_URL = process.env.BASE_URL
+const BASE_URL = '/api'
 
 const toFormData = function (obj) {
   const formData = new FormData()

@@ -31,6 +31,7 @@ export default {
   modules: ['nuxt-buefy', '@nuxtjs/axios'],
 
   axios: {
+    proxy: true,
     headers: {
       common: {
         'Content-Type': 'application/json',
@@ -41,6 +42,12 @@ export default {
         Accept: 'multipart/form-data',
       },
       Authorization: process.env.TOKEN,
+    },
+  },
+  proxy: {
+    '/api': {
+      target: process.env.BASE_URL,
+      pathRewrite: { '^/api/': '' },
     },
   },
   build: {
