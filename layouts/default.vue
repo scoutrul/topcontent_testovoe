@@ -3,7 +3,8 @@
     .container.mt-10( v-if="$route.path !== '/'")
       b-navbar(:mobile-burger="false")
         template(slot="brand")
-          b-button(type="is-warning" size="is-large" @click="$router.push('/')" expanded).button MAP
+          b-navbar-item(@click="$router.push('/')").button MAP
+
     nuxt
 </template>
 

@@ -16,18 +16,20 @@
       <b-input maxlength="200" type="textarea" v-model="details"></b-input>
     </b-field>
 
-    <b-field class="file is-primary" :class="{ 'has-name': !!file }">
-      <b-upload v-model="file" class="file-label">
-        <span class="file-cta">
-          <b-icon class="file-icon" icon="upload"></b-icon>
-          <span class="file-label">Click to upload logotype</span>
-        </span>
-        <span class="file-name" v-if="file"> {{ file.name }}
-        </span>
-      </b-upload>
-    </b-field>
+    b-field
+      b-upload(v-model="file" drag-drop :disabled="!!file")
+        section.section
+          .content.has-text-centered
+            p
+              b-icon(icon="upload" size="is-large")
+            p Drop your files here or click to upload
+    .tags
+      span(
+        v-if="file"
+        class="tag is-primary") {{file.name}}
+        button.delete.is-small(type="button" @click="file = null")
 
-    <b-field class="file is-primary" :class="{ 'has-name': !!file }">
+    b-field.file.is-primary(:class="{ 'has-name': !!file }")
       b-button(
         expanded
         @click="sendForm"
@@ -35,8 +37,6 @@
         size="is-large"
         :disabled="$store.state.isLoading"
         ).my-4 Send request
-    </b-field>
-  </section>
 </template>
 
 <script>
@@ -54,15 +54,20 @@ export default {
   methods: {
     async sendForm() {
       const { name, admin, email, details, file } = this
+      const payload = {
+        name,
+        admin,
+        email,
+        details,
+        file,
+      }
+      let res = {}
+      Object.entries(payload).forEach(([key, value]) => {
+        if (value) res[key] = value
+      })
       await this.$store.dispatch('postData', {
         path: `stands/${this.$route.params.id}`,
-        data: {
-          name,
-          admin,
-          email,
-          details,
-          file,
-        },
+        data: res,
       })
     },
   },

@@ -10,22 +10,28 @@
             OrderForm
           .is-size-3.has-text-centered.my-4 Please choose the seat:
           .content.buttons
-            div(v-for="item in event.stands" :key="item.id").company
-              b-button(
-                expanded
-                @click="openForm(item)"
-                :type="stand.id === item.id ? 'is-success is-light' : ''"
-                size="is-large"
-                :inverted="stand.id !== item.id"
-                :disabled="item.company"
-              ) row: {{ item.row_number }}, seat: {{ item.seat_number }}, price: {{ item.price }}
-              div(v-if="item.company")
-                .field(v-if="item.company.name") {{ item.company.name }}
-                b-image(
-                  v-if="item.company.logo"
-                  :src="item.company.logo"
-                  alt="A random image"
-                  width="64")
+            div(v-for="item in event.stands" :key="item.id").company.card
+              header.card-header.is-size-2.has-text-centered
+                p.card-header-title Row: {{ item.row_number }}, Seat: {{ item.seat_number }}
+              .card-content
+                div(v-if="item.company").content
+                  .has-text-centered(v-if="item.company.name") {{ item.company.name }}
+                  b-image(
+                    v-if="item.company.logo"
+                    :src="item.company.logo"
+                    alt="A random image"
+                    width="64")
+                .content(v-else)
+                  .has-text-centered Price: {{ item.price }}
+              footer.card-footer(v-if="!item.company")
+                b-button(
+                  expanded
+                  @click="openForm(item)"
+                  :type="stand.id === item.id ? 'is-success is-light' : ''"
+                  size="is-large"
+                  :inverted="stand.id !== item.id"
+                  :disabled="item.company"
+                ).card-footer-item Keep!
 </template>
 
 <script>
@@ -78,6 +84,8 @@ export default {
   padding: 4px;
   width: 100%;
   max-width: 320px;
+  min-height: 320px;
+  margin: 10px
 }
 .buttons {
   display: flex;
