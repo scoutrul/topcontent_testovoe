@@ -71,10 +71,11 @@ export default {
         this.stand = item
       }
     },
-    cardModal() {
+    cardModal(item) {
       this.$buefy.modal.open({
         parent: this,
         component: OrderForm,
+        props: { item },
         hasModalCard: true,
         customClass: 'custom-class custom-class-2',
         trapFocus: true,

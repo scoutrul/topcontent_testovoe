@@ -1,5 +1,5 @@
 <template lang="pug">
-  section.layout
+  section.orderForm
 
     <b-field label="Name">
       <b-input v-model="name" placeholder="Company name"></b-input>
@@ -19,7 +19,7 @@
     </b-field>
 
     <b-field label="Logo (url)">
-      <b-input maxlength="200" v-model="file"></b-input>
+      <b-input maxlength="200" v-model="logo"></b-input>
     </b-field>
 
     <b-field label="Details">
@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  props: ['apiPath'],
+  props: ['item'],
   data() {
     return {
       name: '',
@@ -45,18 +45,19 @@ export default {
       email: '',
       phone: '',
       details: '',
-      file: '',
+      logo: '',
     }
   },
+
   methods: {
     async sendForm() {
-      const { name, admin, email, phone, details, file } = this
+      const { name, admin, email, phone, details, logo } = this
       const payload = {
         name,
         admin,
         email,
         details,
-        file,
+        logo,
         phone,
       }
       const res = {}
@@ -65,7 +66,7 @@ export default {
       })
       await this.$store
         .dispatch('postData', {
-          path: `stands/${this.$route.params.id}`,
+          path: `stands/${this.item.id}`,
           data: res,
         })
         .then(() => this.$emit('close'))
@@ -74,8 +75,8 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.layout {
+<style lang="scss">
+.orderForm {
   max-width: 540px;
   margin: auto;
   display: flex;
@@ -84,7 +85,7 @@ export default {
     flex: 1 0 50%;
     padding: 0 8px;
     margin: 0;
-    .label {
+    label.label {
       color: #5cc775;
       display: block;
       font-size: 1rem;
