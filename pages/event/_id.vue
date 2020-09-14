@@ -6,8 +6,6 @@
             .title  {{event.title}}
             .subtitle {{event.description}}
       .container.px-2.pb-6
-          .content(v-if="stand.id")
-            OrderForm
           .is-size-3.has-text-centered.my-4 Please choose the seat:
           .content.buttons
             div(v-for="item in event.stands" :key="item.id").company.card
@@ -26,7 +24,7 @@
               footer.card-footer(v-if="!item.company")
                 b-button(
                   expanded
-                  @click="openForm(item)"
+                  @click="cardModal(item)"
                   :type="stand.id === item.id ? 'is-success is-light' : ''"
                   size="is-large"
                   :inverted="stand.id !== item.id"
@@ -73,6 +71,15 @@ export default {
         this.stand = item
       }
     },
+    cardModal() {
+      this.$buefy.modal.open({
+        parent: this,
+        component: OrderForm,
+        hasModalCard: true,
+        customClass: 'custom-class custom-class-2',
+        trapFocus: true,
+      })
+    },
   },
 }
 </script>
@@ -85,7 +92,7 @@ export default {
   width: 100%;
   max-width: 320px;
   min-height: 320px;
-  margin: 10px
+  margin: 10px;
 }
 .buttons {
   display: flex;

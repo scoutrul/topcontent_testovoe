@@ -37,10 +37,10 @@ export default {
         'Content-Type': 'application/json',
         Accept: 'application/json, text/plain, */*',
       },
-      post: {
-        'Content-Type': 'multipart/form-data',
-        Accept: 'multipart/form-data',
-      },
+      // post: {
+      //   'Content-Type': 'multipart/form-data',
+      //   Accept: 'multipart/form-data',
+      // },
       Authorization: process.env.TOKEN,
     },
   },

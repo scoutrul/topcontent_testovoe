@@ -1,42 +1,38 @@
 <template lang="pug">
-  section(style="max-width: 540px; margin: auto")
+  section.layout
+
     <b-field label="Name">
       <b-input v-model="name" placeholder="Company name"></b-input>
     </b-field>
+
     <b-field label="Admin">
       <b-input placeholder="Kevin Garvey" v-model="admin"></b-input>
     </b-field>
 
     <b-field label="Email">
-      <b-input type="email" placeholder="email@mail.com" maxlength="30" v-model="email">
+      <b-input type="email" placeholder="email@mail.com" maxlength="50" v-model="email">
       </b-input>
+    </b-field>
+
+    <b-field label="Phone">
+      <b-input maxlength="200" type="phone" v-model="phone"></b-input>
+    </b-field>
+
+    <b-field label="Logo (url)">
+      <b-input maxlength="200" v-model="file"></b-input>
     </b-field>
 
     <b-field label="Details">
       <b-input maxlength="200" type="textarea" v-model="details"></b-input>
     </b-field>
 
-    b-field
-      b-upload(v-model="file" drag-drop :disabled="!!file")
-        section.section
-          .content.has-text-centered
-            p
-              b-icon(icon="upload" size="is-large")
-            p Drop your files here or click to upload
-    .tags
-      span(
-        v-if="file"
-        class="tag is-primary") {{file.name}}
-        button.delete.is-small(type="button" @click="file = null")
-
-    b-field.file.is-primary(:class="{ 'has-name': !!file }")
-      b-button(
-        expanded
-        @click="sendForm"
-        type="is-success"
-        size="is-large"
-        :disabled="$store.state.isLoading"
-        ).my-4 Send request
+    b-button(
+      expanded
+      @click="sendForm"
+      type="is-success"
+      size="is-large"
+      :disabled="$store.state.isLoading"
+      ).my-4.mx-2 Send request
 </template>
 
 <script>
@@ -47,29 +43,55 @@ export default {
       name: '',
       admin: '',
       email: '',
+      phone: '',
       details: '',
-      file: null,
+      file: '',
     }
   },
   methods: {
     async sendForm() {
-      const { name, admin, email, details, file } = this
+      const { name, admin, email, phone, details, file } = this
       const payload = {
         name,
         admin,
         email,
         details,
         file,
+        phone,
       }
-      let res = {}
+      const res = {}
       Object.entries(payload).forEach(([key, value]) => {
         if (value) res[key] = value
       })
-      await this.$store.dispatch('postData', {
-        path: `stands/${this.$route.params.id}`,
-        data: res,
-      })
+      await this.$store
+        .dispatch('postData', {
+          path: `stands/${this.$route.params.id}`,
+          data: res,
+        })
+        .then(() => this.$emit('close'))
     },
   },
 }
 </script>
+
+<style lang="scss" scoped>
+.layout {
+  max-width: 540px;
+  margin: auto;
+  display: flex;
+  flex-wrap: wrap;
+  .field {
+    flex: 1 0 50%;
+    padding: 0 8px;
+    margin: 0;
+    .label {
+      color: #5cc775;
+      display: block;
+      font-size: 1rem;
+      font-weight: 600;
+      z-index: 11;
+      position: relative;
+    }
+  }
+}
+</style>
