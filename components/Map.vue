@@ -1,7 +1,7 @@
 <template lang="pug">
     gmap-map(
       ref="gmap"
-      :center="this.data[0] ? formatLocation(this.data[0].location) : {}"
+      :center="this.data[0] ? formatLocation(this.data[0].location) : { location: '0, 0' }"
       map-type-id="terrain"
       :zoom="3.2"
       )

@@ -1,5 +1,3 @@
-const BASE_URL = '/api'
-
 const toFormData = function (obj) {
   const formData = new FormData()
 
@@ -23,7 +21,7 @@ export const actions = {
   async getData({ commit }, { path, facility }) {
     commit('updLoading', true)
     try {
-      const res = await this.$axios.$get(`${BASE_URL}/${path}`)
+      const res = await this.$axios.$get(`${path}`)
       commit('setData', {
         facility,
         data: res,
@@ -39,7 +37,7 @@ export const actions = {
     commit('updLoading', true)
     try {
       await this.$axios
-        .$post(`${BASE_URL}/${path}`, toFormData(data))
+        .$post(`${path}`, toFormData(data))
         .then(() => this.$toast.success('Success'))
         .catch((e) => {
           this.$toast.error(e.response)
