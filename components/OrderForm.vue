@@ -1,6 +1,5 @@
 <template lang="pug">
   section.orderForm
-
     b-field( label="Name")
       b-input( v-model="name" placeholder="Company name")
 
@@ -62,7 +61,10 @@ export default {
           path: `stands/${this.item.id}`,
           data: res,
         })
-        .then(() => this.$emit('close'))
+        .then(() => {
+          this.$emit('updateData')
+          this.$emit('close')
+        })
     },
   },
 }

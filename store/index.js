@@ -40,8 +40,9 @@ export const actions = {
     try {
       await this.$axios
         .$post(`${BASE_URL}/${path}`, toFormData(data))
-        .then(() => {
-          this.$toast.success('Success')
+        .then(() => this.$toast.success('Success'))
+        .catch((e) => {
+          this.$toast.error(e.response)
         })
     } catch (err) {
       this.$toast.error(err)

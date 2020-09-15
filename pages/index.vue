@@ -15,12 +15,15 @@ export default {
   }),
 
   mounted() {
-    this.getData({ facility: this.facility, path: this.apiPath })
+    this.updateData()
   },
   methods: {
     ...mapActions({
       getData: 'getData',
     }),
+    async updateData() {
+      await this.getData({ facility: this.facility, path: this.apiPath })
+    },
   },
 }
 </script>
