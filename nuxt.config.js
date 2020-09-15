@@ -31,25 +31,16 @@ export default {
   modules: ['nuxt-buefy', '@nuxtjs/axios'],
 
   axios: {
-    proxy: true,
+    baseURL: process.env.BASE_URL,
     headers: {
       common: {
         'Content-Type': 'application/json',
         Accept: 'application/json, text/plain, */*',
       },
-      // post: {
-      //   'Content-Type': 'multipart/form-data',
-      //   Accept: 'multipart/form-data',
-      // },
       Authorization: process.env.TOKEN,
     },
   },
-  proxy: {
-    '/api': {
-      target: process.env.BASE_URL,
-      pathRewrite: { '^/api/': '' },
-    },
-  },
+
   build: {
     transpile: [/^vue2-google-maps($|\/)/],
   },
