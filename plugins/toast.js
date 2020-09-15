@@ -10,6 +10,9 @@ export default (ctx, inject) => {
     success: (message) => {
       Toast.open({ position: 'is-bottom', message, type: 'is-success' })
     },
+    info: (message) => {
+      Toast.open({ position: 'is-bottom', message, type: 'is-info' })
+    },
   }
 
   inject('toast', toast)

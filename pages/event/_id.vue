@@ -7,29 +7,27 @@
             .subtitle {{event.description}}
       .container.px-2.pb-6
           .is-size-3.has-text-centered.my-4 Please choose the seat:
-          .content.buttons
-            div(v-for="item in event.stands" :key="item.id").company.card
-              header.card-header.is-size-2.has-text-centered
-                p.card-header-title Row: {{ item.row_number }}, Seat: {{ item.seat_number }}
-              .card-content
-                div(v-if="item.company").content
-                  .has-text-centered(v-if="item.company.name") {{ item.company.name }}
+          .content.columns.is-mobile.is-multiline.is-centered
+            div(v-for="stand in event.stands" :key="stand.id").column.is-narrow
+              .card
+                .card-header.content
+                  .card-header-title.justify-center Row: {{ stand.row_number }}
+                  .card-header-title.justify-center Seat: {{ stand.seat_number }}
+                div(v-if="stand.company").card-content.content
+                  .has-text-centered(v-if="stand.company.name") {{ stand.company.name }}
                   b-image(
-                    v-if="item.company.logo"
-                    :src="item.company.logo"
+                    v-if="stand.company.logo"
+                    :src="stand.company.logo"
                     alt="A random image"
-                    width="64")
+                    style="max-width: 100px")
                 .content(v-else)
-                  .has-text-centered Price: {{ item.price }}
-              footer.card-footer(v-if="!item.company")
-                b-button(
-                  expanded
-                  @click="cardModal(item)"
-                  :type="stand.id === item.id ? 'is-success is-light' : ''"
-                  size="is-large"
-                  :inverted="stand.id !== item.id"
-                  :disabled="item.company"
-                ).card-footer-item Keep!
+                  .has-text-centered Price: {{ stand.price }}
+                footer.card-footer()
+                  b-button(
+                    @click="cardModal(stand)"
+                    :type="stand.company ? 'is-light' : 'is-success'"
+                    :disabled="stand.company"
+                  ).card-footer-item {{ stand.company ? 'reserved': 'Keep!'}}
 </template>
 
 <script>
@@ -64,13 +62,6 @@ export default {
     ...mapActions({
       getData: 'getData',
     }),
-    openForm(item) {
-      if (item.id === this.stand.id) {
-        this.stand = {}
-      } else {
-        this.stand = item
-      }
-    },
     cardModal(item) {
       this.$buefy.modal.open({
         parent: this,
@@ -85,19 +76,25 @@ export default {
 }
 </script>
 <style scoped>
+.card-header {
+  background: #eaeaea;
+  box-shadow: none;
+  width: 100%;
+}
 .company {
   display: flex;
   align-items: center;
   flex-direction: column;
   padding: 4px;
   width: 100%;
-  max-width: 320px;
-  min-height: 320px;
+  max-width: 240px;
+  min-height: 220px;
   margin: 10px;
 }
-.buttons {
+.places {
   display: flex;
   justify-content: center;
   align-items: baseline;
+  flex-wrap: wrap;
 }
 </style>

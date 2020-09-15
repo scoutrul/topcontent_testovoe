@@ -28,7 +28,7 @@ export const actions = {
         facility,
         data: res,
       })
-      this.$toast.success('Updated')
+      this.$toast.info('Updated')
     } catch (err) {
       this.$toast.error(err)
     } finally {

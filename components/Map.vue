@@ -25,7 +25,7 @@
           div Start: {{activeItem.start_date}}
           div End: {{activeItem.end_date}}
         .action
-          b-button(@click="goToEvent(activeItem.id)") Go!
+          b-button(@click="goToEvent(activeItem.id)" type="is-warning") Go!
 </template>
 
 <script>

@@ -1,10 +1,11 @@
 <template lang="pug">
   section.content
-    .container.mt-10( v-if="$route.path !== '/'")
+    .container.mt-3.ml-2(v-if="$route.path !== '/'")
       b-navbar(:mobile-burger="false")
         template(slot="brand")
-          b-navbar-item(@click="$router.push('/')").button MAP
-
+          button.button.is-warning(v-if="$route.path !== '/'" @click="$router.push('/')")
+            b-icon(icon="map")
+            span Map
     nuxt
 </template>
 
@@ -18,9 +19,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.button {
-  margin: 10px auto 20px auto;
-}
-</style>

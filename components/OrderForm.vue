@@ -1,30 +1,23 @@
 <template lang="pug">
   section.orderForm
 
-    <b-field label="Name">
-      <b-input v-model="name" placeholder="Company name"></b-input>
-    </b-field>
+    b-field( label="Name")
+      b-input( v-model="name" placeholder="Company name")
 
-    <b-field label="Admin">
-      <b-input placeholder="Kevin Garvey" v-model="admin"></b-input>
-    </b-field>
+    b-field( label="Admin")
+      b-input( placeholder="Kevin Garvey" v-model="admin")
 
-    <b-field label="Email">
-      <b-input type="email" placeholder="email@mail.com" maxlength="50" v-model="email">
-      </b-input>
-    </b-field>
+    b-field( label="Email")
+      b-input( type="email" placeholder="email@mail.com" maxlength="50" v-model="email")
 
-    <b-field label="Phone">
-      <b-input maxlength="200" type="phone" v-model="phone"></b-input>
-    </b-field>
+    b-field( label="Phone")
+      b-input( maxlength="254" type="phone" v-model="phone")
 
-    <b-field label="Logo (url)">
-      <b-input maxlength="200" v-model="logo"></b-input>
-    </b-field>
+    b-field( label="Logo (url)" style="flex: 1 1 100%")
+      b-input( maxlength="254" v-model="logo")
 
-    <b-field label="Details">
-      <b-input maxlength="200" type="textarea" v-model="details"></b-input>
-    </b-field>
+    b-field( label="Details")
+      b-input( maxlength="254" type="textarea" v-model="details")
 
     b-button(
       expanded
@@ -85,6 +78,7 @@ export default {
     flex: 1 0 50%;
     padding: 0 8px;
     margin: 0;
+    min-width: 250px;
     label.label {
       color: #5cc775;
       display: block;
